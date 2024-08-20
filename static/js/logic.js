@@ -1,18 +1,20 @@
-// Define the url for the GeoJSON earthquake data
-var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Create the map
+// Earth quake data - https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+// earthQuarke data will be from abo URL
+ var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+// Lets create Map
 var myMap = L.map("map", {
     center: [37.09, -95.71],
     zoom: 5
 });
 
-// Add a tile layer to the map
+// use stree Map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// Retrieve and add the earthquake data to the map
+// Lets Retrieve and add the earthquake data to the map
 d3.json(url).then(function (data) {
     function mapStyle(feature) {
         return {
@@ -25,8 +27,10 @@ d3.json(url).then(function (data) {
             weight: 0.5
         };
 
-        // Establish colors for depth
+       
     }
+
+     // Establish colors for depth
     function mapColor(depth) {
         switch (true) {
             case depth > 90:
@@ -43,6 +47,7 @@ d3.json(url).then(function (data) {
                 return "lightgreen";
         }
     }
+    
     // Establish magnitude size
     function mapRadius(mag) {
         if (mag === 0) {
